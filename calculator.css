@@ -1,3 +1,13 @@
+body{
+    background-color: #FFFFF0;
+}
+
+#Title{
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    font-size: 40px;
+}
+
 .calculator{ 
     display: grid;
     grid-template-columns: repeat(4, 100px);
@@ -7,10 +17,10 @@
     width:50%;
     padding-top: 10px;
     padding-bottom: 20px;
-    column-gap: 10px;
-    row-gap: 1em;
-    /* background-color: ; */
-    border: 1px solid gray;
+    /* column-gap: 10px; */
+    /* row-gap: 1em; */
+    background-color: #E8E2D1;
+    /* border: 1px solid gray; */
     width: 460px;
 }
 
@@ -20,9 +30,11 @@
     grid-row-start:  1;
     grid-row-end: 3;
     /* border: 1px solid gray; */
-    line-height: 175px;
+    line-height: 150px;
     text-align:right;
     font-size: 45px;
+    font-family: 'Montserrat', sans-serif;
+    /* color: white; */
 }
 
 
@@ -39,7 +51,29 @@
     /* justify-content: center; */
     column-gap: 10px;
     row-gap: 1em;
-    background-color: white;
-    border: 1px solid gray;
+    background-color: #D1E8E0;
+    /* border: 1px solid gray; */
     font-size: 20px;
+    font-family: 'Montserrat', sans-serif;
+    /* color:white; */
+}
+
+#Equals{
+    background-color: #FF7D40;
+}
+
+#Subtract{
+    background-color: #4071FF;
+}
+
+#Multiply{
+    background-color: #4071FF;
+}
+
+#Add{
+    background-color: #4071FF;
+}
+
+#Divide{
+    background-color: #4071FF;
 }
