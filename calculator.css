@@ -1,11 +1,13 @@
 body{
     background-color: #FFFFF0;
+    color: #333;
 }
 
 #Title{
     font-family: 'Montserrat', sans-serif;
     text-align: center;
     font-size: 40px;
+    color: #A9E655;
 }
 
 .calculator{ 
@@ -19,8 +21,8 @@ body{
     padding-bottom: 20px;
     /* column-gap: 10px; */
     /* row-gap: 1em; */
-    background-color: #E8E2D1;
-    /* border: 1px solid gray; */
+    /* background-color: #E8E2D1; */
+    /* border: 1px solid #333; */
     width: 460px;
 }
 
@@ -34,7 +36,8 @@ body{
     text-align:right;
     font-size: 45px;
     font-family: 'Montserrat', sans-serif;
-    /* color: white; */
+    background-color: #333;
+    color: white;
 }
 
 

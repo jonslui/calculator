@@ -1,13 +1,17 @@
 let lastNum = 0;
 let operator = 0;
+let counter = 0;
 let currentNum = "0";
-// let counter = 0;
+let tmpoperator = 0;
+let tmp = 0;
 keyPressed = {};
 
 
 // Display
 const Screen = document.querySelector('#Screen');
 function writeScreen(n){
+    // n=parseInt(n);
+    n = n.toLocaleString('fullwide', {maximumFractionDigits:2});
     Screen.textContent = parseFloat(n);
 };
 
@@ -20,10 +24,12 @@ document.addEventListener('keydown', function(e){
     if(keyPressed.ShiftRight == true && keyPressed.Equal == true){
         add();
         keyPressed = {};
+        // return;
     }
     else if(keyPressed.ShiftLeft == true && keyPressed.Equal == true){
         add();
         keyPressed = {};
+        // return;
     }
     else if(keyPressed.ShiftRight == true && keyPressed.Digit8 == true){
         multiply();
@@ -43,12 +49,12 @@ document.addEventListener('keydown', function(e){
     else if(e.keyCode == 191){
         divide();
         keyPressed = {};
-
     }
     else if(e.keyCode == 13){
-        operate();
+        // 
+        // 
+        equals();
         keyPressed = {};
-
     }
     else if(e.keyCode == 27 || e.keyCode == 67){
         clear();
@@ -62,10 +68,10 @@ document.addEventListener('keydown', function(e){
         backspace();
         keyPressed = {};
     }
-    // else if(e.Keycode == "decimal"){
-    //     decimal();
-    //     keyPressed = {};
-    // }
+    else if(e.keyCode == 190){
+        decimal();
+        keyPressed = {};
+    }
 });
 
 
@@ -144,7 +150,6 @@ function backspace(){
 
 
 
-// EDIT
 const Decimal = document.querySelector('#Decimal');
 Decimal.addEventListener('click', decimal);
 function decimal(){
@@ -159,7 +164,9 @@ Opposite.addEventListener('click', opposite);
 function opposite(){
     currentNum *= -1;
     writeScreen(currentNum);
-}
+};
+
+
 
 const Clear = document.querySelector('#Clear');
 Clear.addEventListener('click',clear);
@@ -171,64 +178,165 @@ function clear(){
 };
 
 
-// place add/subtract/multiply/divide inside their own loop?
-//or have a seperate function from operate?
 
 const Add = document.querySelector('#Add');
 Add.addEventListener('click', add);
 function add(){
+    if(counter == 1 && operator != 1){
+        operate();
+
+        writeScreen(lastNum);
+        currentNum = "0";
+        operator = 1;
+
+
+        return;
+    }
+    if(counter == 1 && operator == 1){
+        lastNum = parseFloat(lastNum) + parseFloat(currentNum);
+        currentNum = "0";
+        writeScreen(lastNum);
+
+        return;
+    }
+
     lastNum = currentNum;
     currentNum = "0";
     operator = 1;
+    counter = 1;
 };
+
+
 
 const Subtract = document.querySelector('#Subtract');
 Subtract.addEventListener('click', subtract);
 function subtract(){
+    if(counter == 1 && operator != 2){
+        operate();
+
+        writeScreen(lastNum);
+        currentNum = "0";
+        operator = 2;
+
+
+        return;
+    }
+    if(counter == 1 && operator == 2){
+        operate();
+
+        currentNum = "0";
+        writeScreen(lastNum);
+
+        return;
+    }
     lastNum = currentNum;
     currentNum = "0";
     operator = 2;
+    counter = 1;
 };
+
+
 
 const Divide = document.querySelector('#Divide');
 Divide.addEventListener('click', divide);
 function divide(){
+    if(counter == 1 && operator != 3){
+        tmpoperator = 2;
+        tmp = currentNum;
+        currentNum = "0";
+        writeScreen(lastNum);
+        return;
+   }
+    // if(counter == 1 && operator != 3){
+    //     operate();
+
+    //     writeScreen(lastNum);
+    //     currentNum = "0";
+    //     operator = 3;
+
+    //     return;
+    // }
+    if(counter == 1 && operator == 3){
+        operate();
+        writeScreen(lastNum);
+        currentNum = "0";
+
+        return;
+    }
+
     lastNum = currentNum;
     currentNum = "0";
     operator = 3;
-}
+    counter = 1;
+};
+
+
 
 const Multiply = document.querySelector('#Multiply');
 Multiply.addEventListener('click', multiply);
 function multiply(){
+    if(counter == 1 && operator != 4){
+         tmpoperator = 1;
+         tmp = currentNum;
+         currentNum = "0";
+         writeScreen(lastNum);
+         return;
+    };
+
+    if(counter == 1 && operator == 4){
+        operate();
+        writeScreen(lastNum);
+        currentNum = "0";
+
+        return;
+    };
+
     lastNum = currentNum;
     currentNum = "0";
     operator = 4;
-}
+    counter = 1;
+
+};
+
+
 
 const Equals = document.querySelector('#Equals');
-Equals.addEventListener('click', operate);
-    function operate(){
-        if(operator == 1){
-            lastNum = parseFloat(lastNum) + parseFloat(currentNum);
-        }
-        else if(operator == 2){
-            lastNum = parseFloat(lastNum) - parseFloat(currentNum);
-        }
-        else if(operator == 3){
-            lastNum = parseFloat(lastNum) / parseFloat(currentNum);
-        }
-        else if(operator == 4){
-            lastNum = parseFloat(lastNum) * parseFloat(currentNum);
-        }
+Equals.addEventListener('click', equals);
+function equals(){
+    operate();
+    
+    writeScreen(lastNum);
+    currentNum = "0";
+    operator = 0;
+    counter = 0;
+};
 
-        // if(lastNum == Infinity){
-        //     writeScreen("To Infinity and Beyond!");
-        // // }
-        // // else{
-        //     writeScreen(lastNum);
-        // }
-        writeScreen(lastNum);
-        currentNum = lastNum.toString();
-        operator = 0;
-    };
+// add a function into multiply/divide that says if tmpopp 2//tmpopp 1 --> do first sequence, need two tmp values?
+// oldoldvalue save as tmp2?
+function operate(){
+    // if previous operator was multiplication or division 
+    if(tmpoperator == 1){
+        currentNum = parseFloat(tmp) * parseFloat(currentNum);
+        tmpoperator = 0;
+        tmp = 0;
+    }
+    else if(tmpoperator == 2){
+        currentNum = parseFloat(tmp) / parseFloat(currentNum);
+        tmpoperator = 0;
+        tmp = 0;
+    }
+
+    if(operator == 1){
+        lastNum = parseFloat(lastNum) + parseFloat(currentNum);
+    }
+    else if(operator == 2){
+        lastNum = parseFloat(lastNum) - parseFloat(currentNum);
+    }
+    else if(operator == 3){
+        lastNum = parseFloat(lastNum) / parseFloat(currentNum);
+    }
+    else if(operator == 4){
+        lastNum = parseFloat(lastNum) * parseFloat(currentNum);
+    }
+
+};
