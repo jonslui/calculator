@@ -55,28 +55,57 @@ body{
     column-gap: 10px;
     row-gap: 1em;
     background-color: #D1E8E0;
-    /* border: 1px solid gray; */
+    border: 0px;
     font-size: 20px;
     font-family: 'Montserrat', sans-serif;
+    
     /* color:white; */
+
+    cursor: pointer;
 }
+
+.button:hover{
+    background-color: rgba(209, 232, 224, .7);
+}
+
+
+
 
 #Equals{
     background-color: #FF7D40;
 }
+#Equals:hover{
+    background-color: rgba(255, 125, 64, .7);
+}
+
 
 #Subtract{
     background-color: #4071FF;
 }
+#Subtract:hover{
+    background-color: rgba(64, 113, 255, 0.7);
+}
+
 
 #Multiply{
     background-color: #4071FF;
 }
+#Multiply:hover{
+    background-color: rgba(64, 113, 255, 0.7);
+}
+
 
 #Add{
     background-color: #4071FF;
 }
+#Add:hover{
+    background-color: rgba(64, 113, 255, 0.7);
+}
+
 
 #Divide{
     background-color: #4071FF;
+}
+#Divide:hover{
+    background-color: rgba(64, 113, 255, 0.7);
 }

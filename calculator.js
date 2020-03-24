@@ -7,11 +7,16 @@ let tmp = 0;
 keyPressed = {};
 
 
+
 // Display
 const Screen = document.querySelector('#Screen');
 function writeScreen(n){
     // n=parseInt(n);
-    n = n.toLocaleString('fullwide', {maximumFractionDigits:2});
+
+
+    //this 'fullwide' string affects addition
+    // n = n.toLocaleString('fullwide', {maximumFractionDigits:2});
+   
     Screen.textContent = parseFloat(n);
 };
 
@@ -51,8 +56,6 @@ document.addEventListener('keydown', function(e){
         keyPressed = {};
     }
     else if(e.keyCode == 13){
-        // 
-        // 
         equals();
         keyPressed = {};
     }
@@ -240,6 +243,9 @@ function subtract(){
 const Divide = document.querySelector('#Divide');
 Divide.addEventListener('click', divide);
 function divide(){
+    if(tmpoperator != 0){
+        xx();
+    }
     if(counter == 1 && operator != 3){
         tmpoperator = 2;
         tmp = currentNum;
@@ -247,15 +253,6 @@ function divide(){
         writeScreen(lastNum);
         return;
    }
-    // if(counter == 1 && operator != 3){
-    //     operate();
-
-    //     writeScreen(lastNum);
-    //     currentNum = "0";
-    //     operator = 3;
-
-    //     return;
-    // }
     if(counter == 1 && operator == 3){
         operate();
         writeScreen(lastNum);
@@ -275,6 +272,9 @@ function divide(){
 const Multiply = document.querySelector('#Multiply');
 Multiply.addEventListener('click', multiply);
 function multiply(){
+    if(tmpoperator != 0){
+        xx();
+    }
     if(counter == 1 && operator != 4){
          tmpoperator = 1;
          tmp = currentNum;
@@ -311,8 +311,25 @@ function equals(){
     counter = 0;
 };
 
-// add a function into multiply/divide that says if tmpopp 2//tmpopp 1 --> do first sequence, need two tmp values?
-// oldoldvalue save as tmp2?
+
+
+// seperate them ?
+function xx(){
+    if(tmpoperator == 1){
+        currentNum = parseFloat(tmp) * parseFloat(currentNum);
+        tmpoperator = 0;
+        tmp = 0;
+    }
+    else if(tmpoperator == 2){
+        currentNum = parseFloat(tmp) / parseFloat(currentNum);
+        alert("a");
+        tmpoperator = 0;
+        tmp = 0;
+    }
+};
+
+
+
 function operate(){
     // if previous operator was multiplication or division 
     if(tmpoperator == 1){
