@@ -58,18 +58,12 @@ body{
     border: 0px;
     font-size: 20px;
     font-family: 'Montserrat', sans-serif;
-    
-    /* color:white; */
-
     cursor: pointer;
 }
 
 .button:hover{
     background-color: rgba(209, 232, 224, .7);
 }
-
-
-
 
 #Equals{
     background-color: #FF7D40;

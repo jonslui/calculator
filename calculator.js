@@ -306,9 +306,7 @@ function equals(){
     operate();
     
     writeScreen(lastNum);
-    currentNum = "0";
     operator = 0;
-    counter = 0;
 };
 
 
